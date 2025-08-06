@@ -1,0 +1,91 @@
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-brand-900 py-20 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-600/10 via-transparent to-brand-500/10"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <div class="mb-12">
+                {% if section.settings.logo != blank %}
+                    <img src="{{ section.settings.logo | img_url: 'master' }}" alt="{{ shop.name }} Logo" class="w-56 h-auto mx-auto mb-8 opacity-95 drop-shadow-2xl filter brightness-0 invert">
+                {% endif %}
+            </div>
+            <h1 class="text-5xl lg:text-7xl font-bold font-display text-white mb-6 tracking-tight">
+                {{ section.settings.title | default: "Elite Grappling Gear" }}<br>
+                <span class="text-brand-400">{{ section.settings.subtitle | default: "Built for Champions" }}</span>
+            </h1>
+            <p class="text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+                {{ section.settings.description | default: "Premium rashguards and grapple shorts engineered for all grappling sports. BJJ, Judo, Wrestling, MMA - Uncompromising quality, superior comfort, championship performance." }}
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="group bg-brand-600 hover:bg-brand-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    {{ section.settings.button_text | default: "Shop Collection" }}
+                    <svg class="inline-block w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="{{ section.settings.secondary_button_link | default: '/pages/about' }}" class="group text-white hover:text-brand-400 font-semibold text-lg transition-colors duration-200 flex items-center border border-white/30 px-8 py-4 rounded-full hover:border-brand-400/50">
+                    {{ section.settings.secondary_button_text | default: "Learn More" }}
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Hero Logo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Elite Grappling Gear"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Built for Champions"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_button_text",
+      "label": "Secondary Button Text",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_button_link",
+      "label": "Secondary Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

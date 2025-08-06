@@ -1,0 +1,76 @@
+<!-- Newsletter -->
+<section class="py-20 lg:py-24 bg-gray-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl lg:text-5xl font-bold font-display text-white mb-4">{{ section.settings.title | default: "Join the Community" }}</h2>
+        <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">{{ section.settings.subtitle | default: "Get training tips, new product launches, and exclusive discounts for the grappling community. Plus, get 10% off your first order!" }}</p>
+        
+        {% form 'customer', class: 'flex flex-col sm:flex-row gap-4 max-w-md mx-auto newsletter-form' %}
+            {% if form.posted_successfully? %}
+                <div class="text-green-400 mb-4">
+                    Thanks for subscribing! Check your email for a discount code.
+                </div>
+            {% endif %}
+            
+            {% if form.errors %}
+                <div class="text-red-400 mb-4">
+                    {{ form.errors | default_errors }}
+                </div>
+            {% endif %}
+            
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <input 
+                type="email" 
+                name="contact[email]" 
+                class="flex-1 px-6 py-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent newsletter-input" 
+                placeholder="{{ section.settings.placeholder | default: 'Enter your email address' }}"
+                required
+            >
+            <button type="submit" class="bg-brand-600 text-white px-8 py-4 rounded-2xl font-semibold hover:bg-brand-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 newsletter-btn">
+                {{ section.settings.button_text | default: "Get 10% Off" }}
+            </button>
+        {% endform %}
+        
+        <p class="text-gray-400 text-sm mt-6">{{ section.settings.disclaimer | default: "Join 5,000+ grapplers worldwide. Unsubscribe anytime." }}</p>
+    </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Join the Community"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter your email address"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Get 10% Off"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

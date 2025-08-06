@@ -1,0 +1,77 @@
+<div class="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+    <a href="{{ product.url }}">
+        <div class="relative h-80 overflow-hidden">
+            {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '400x400' }}" 
+                     alt="{{ product.featured_image.alt | escape }}" 
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            {% else %}
+                <div class="h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <span class="text-gray-500 font-medium">{{ product.title }}</span>
+                </div>
+            {% endif %}
+            
+            {% if product.compare_at_price > product.price %}
+                <div class="absolute top-4 left-4">
+                    <span class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                        SALE
+                    </span>
+                </div>
+            {% endif %}
+        </div>
+    </a>
+    
+    <div class="p-8">
+        <div class="flex items-center justify-between mb-2">
+            {% if product.tags contains 'new' %}
+                <span class="inline-block bg-brand-100 text-brand-700 text-xs font-semibold px-3 py-1 rounded-full">NEW</span>
+            {% elsif product.tags contains 'bestseller' %}
+                <span class="inline-block bg-yellow-100 text-yellow-700 text-xs font-semibold px-3 py-1 rounded-full">BESTSELLER</span>
+            {% else %}
+                <span class="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full">PREMIUM</span>
+            {% endif %}
+            <div class="flex text-yellow-400">
+                ★★★★★
+            </div>
+        </div>
+        
+        <h3 class="text-2xl font-bold text-gray-900 mb-3 group-hover:text-brand-600 transition-colors">
+            <a href="{{ product.url }}">{{ product.title }}</a>
+        </h3>
+        
+        <p class="text-gray-600 mb-6 leading-relaxed">
+            {{ product.description | strip_html | truncate: 120 }}
+        </p>
+        
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl font-bold text-gray-900">${{ product.price | money_without_currency }}</span>
+                {% if product.compare_at_price > product.price %}
+                    <span class="text-lg text-gray-500 line-through">${{ product.compare_at_price | money_without_currency }}</span>
+                {% endif %}
+            </div>
+            {% if product.price >= 7500 %}
+                <div class="text-sm text-brand-600 font-semibold">Free Shipping</div>
+            {% endif %}
+        </div>
+        
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="product-form">
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            
+            {% if product.available %}
+                <button type="submit" name="add" class="btn product-form__cart-submit w-full bg-brand-600 hover:bg-brand-700 text-white py-4 rounded-2xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
+                    <span>Add to Cart</span>
+                    <div class="loading-overlay__spinner hidden">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                </button>
+            {% else %}
+                <button type="button" class="w-full bg-gray-400 text-white py-4 rounded-2xl font-semibold text-lg cursor-not-allowed" disabled>
+                    Sold Out
+                </button>
+            {% endif %}
+        </form>
+    </div>
+</div>

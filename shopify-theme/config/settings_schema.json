@@ -1,0 +1,67 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Renshuu Republic",
+    "theme_author": "Custom",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "colors_accent_1",
+        "default": "#0284c7",
+        "label": "Brand Primary"
+      },
+      {
+        "type": "color",
+        "id": "colors_accent_2", 
+        "default": "#0369a1",
+        "label": "Brand Secondary"
+      },
+      {
+        "type": "color",
+        "id": "colors_text",
+        "default": "#1f2937",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "colors_background_1",
+        "default": "#ffffff",
+        "label": "Background"
+      }
+    ]
+  },
+  {
+    "name": "Typography", 
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "default": "assistant_n4",
+        "label": "Heading font"
+      },
+      {
+        "type": "font_picker", 
+        "id": "type_body_font",
+        "default": "assistant_n4",
+        "label": "Body font"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]
